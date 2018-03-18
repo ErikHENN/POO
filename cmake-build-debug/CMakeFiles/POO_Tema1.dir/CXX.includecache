@@ -11,6 +11,8 @@ iostream
 -
 cstring
 -
+stdlib.h
+-
 BigInt.h
 C:/Users/Erik/CLionProjects/POO-Tema1/BigInt.h
 
