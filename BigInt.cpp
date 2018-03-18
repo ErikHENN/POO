@@ -11,7 +11,7 @@ using namespace std;
  * aloc un spatiu de memorie si initializez cu 0.
  */
 BigInt::BigInt() {
-    vector = new int;
+    vector = new int[1];
     nr_cifre = 0;
 }
 /**
@@ -82,6 +82,7 @@ istream &operator >>(istream &input, BigInt& V) {
     for(i=V.nr_cifre-1;i>=0;i--)
         V.vector[V.nr_cifre-i-1]= sir[i] - '0';
 
+    delete[] sir; //Ma asigur ca eliberez memoria
 
     return input;
 }
@@ -106,7 +107,6 @@ ostream &operator <<(ostream &output, const BigInt& V) {
  * Atribuire de la dreapta spre stanga
  */
 BigInt& BigInt::operator=(const BigInt &V1) {
-    if (this != &V1) {
         int i;
 
         delete[] this->vector;
@@ -116,7 +116,6 @@ BigInt& BigInt::operator=(const BigInt &V1) {
         this->nr_cifre = V1.nr_cifre;
         for (i = 0; i < V1.nr_cifre; i++)
             this->vector[i] = V1.vector[i];
-    }
     return *this;
 
 }
@@ -160,24 +159,25 @@ BigInt BigInt::operator-(const BigInt& V2)   {
     BigInt H1, H2, Rez;
     H1 = *this;
     H2 = V2;
+    Rez.vector = new int[H1.nr_cifre + 1];
     int i, T=0;
-
+    Rez.nr_cifre = H1.nr_cifre;
     //Pornim de la presupunerea ca H2 < H1
     for (i=H2.nr_cifre; i < H1.nr_cifre; i++)
         H2.vector[i] = 0;
     for (i=0;i<H1.nr_cifre;i++) {
-        H1.vector[i] = H1.vector[i] - (H2.vector[i] + T);
-        if (H1.vector[i] < 0)
+        Rez.vector[i] = H1.vector[i] - (H2.vector[i] + T);
+        if (Rez.vector[i] < 0)
             T = 1;
         else
             T = 0;
         if (T != 0)
-            H1.vector[i] = H1.vector[i] + 10;
+            Rez.vector[i] = Rez.vector[i] + 10;
     }
-    while ( H1.vector[H1.nr_cifre-1] == 0 )
-        H1.nr_cifre--;
+    while ( Rez.vector[Rez.nr_cifre-1] == 0 )
+        Rez.nr_cifre--;
 
-    return H1;
+    return Rez;
 }
 /**Operatorul de inmultire
  *
