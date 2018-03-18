@@ -222,19 +222,16 @@ BigInt BigInt::operator*(const BigInt& V2)  {
  * @return Catul impartirii
  * Spre deosebire de operatiile precedente, impartirea o fac prin scaderi repetate pana cand Deimpartitul se cuprinde in Impartitor, numarand la fiecare pas
  */
-BigInt BigInt::operator/(const BigInt V2)  {
+BigInt BigInt::operator/(const BigInt& V2)  {
 
     BigInt V1;
-    BigInt Rezultat("0");
+    int Rezultat = 0;
+    //BigInt Rezultat("0");
     V1 = *this;//Deimpartit
 
     while (V1.comparCu(V2) >= 0) {//comparCu este functie auxiliara, returneaza -1 daca V1 < V2 ; 0 daca V1 = V2 ; 1 daca V1 > V2
-
         V1 = V1 - V2;
         Rezultat = Rezultat + 1;
-        // cout<<"Test"<<"\n";
-        //cout << Rezultat << "\n";
-        //Rezultat = Rezultat + 1;
     }
 
     return Rezultat;
@@ -264,10 +261,9 @@ int BigInt::comparCu(const BigInt V)  {
 
     V1 = *this;
     V2 = V;
-
     while(V1.vector[V1.nr_cifre-1]==0)
         V1.nr_cifre--; //ma asigur ca nu sunt zerouri nesemnificative
-    while(V2.vector[V1.nr_cifre-1]==0)
+    while(V2.vector[V2.nr_cifre-1]==0)
         V2.nr_cifre--;
     if(V1.nr_cifre != V2.nr_cifre)
         if (V1.nr_cifre < V2.nr_cifre)

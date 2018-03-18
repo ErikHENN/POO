@@ -21,7 +21,7 @@ int main() {
     cout<<"Paritate: "<<V.par() << "\n";
     cout<<"Suma cifre: "<<V.suma_cifre() << "\n";
 
-   // cout << "\nRezultat impartire: ";cout<<V/H;
+    cout << "\nRezultat impartire: ";cout<<V/H;
 
     return 0;
 }

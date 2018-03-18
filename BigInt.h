@@ -19,7 +19,7 @@ public:
     BigInt operator+(const BigInt&);
     BigInt operator-(const BigInt&);
     BigInt operator*(const BigInt&);
-    BigInt operator/(const BigInt);
+    BigInt operator/(const BigInt&);
     BigInt operator%(const BigInt&);
     BigInt& operator=(const BigInt&);
 
